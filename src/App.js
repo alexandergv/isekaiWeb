@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState } from "react";
 
-function App() {
+export default function App() {
+  const [health, setHealth] = useState(100);
+
+  const reduceLife = (factor) => {
+    let life = document.querySelector(":root");
+    life.style.setProperty("--health", health - factor + "px");
+    setHealth(health - factor);
+  };
+
+  const cureLife = () => {
+    let life = document.querySelector(":root");
+    life.style.setProperty("--health", 100 + "px");
+    setHealth(100);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 style={{ color: "red" }}>Hello StackBlitz!</h1>
+      {health > 0 ? <div className="health-bar"></div> : <p>Is dead</p>}
+      <p>Start editing to see some magic happen</p>
+      <button onClick={() => reduceLife(10)}>Attack</button>
+      <button onClick={cureLife}>Cure</button>
     </div>
   );
 }
-
-export default App;
