@@ -1,5 +1,6 @@
 :root {
     --health: 100px;
+    --health-color: greenyellow
 }
 
 h1,
@@ -9,7 +10,7 @@ p {
 
 .health-bar {
     height: 20px;
-    background-color: greenyellow;
+    background-color: var(--health-color);
     width: var(--health);
     transition: width 0.15s;
 }

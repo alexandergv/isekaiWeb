@@ -2,18 +2,22 @@ import React from "react";
 import { useState } from "react";
 
 export default function App() {
-  const [health, setHealth] = useState(100);
+  let defaultHealth = 100;
+  const [health, setHealth] = useState(defaultHealth);
+  const life = document.querySelector(":root");
 
   const reduceLife = (factor) => {
-    let life = document.querySelector(":root");
     life.style.setProperty("--health", health - factor + "px");
+    if (health <= defaultHealth * 0.4) {
+      life.style.setProperty("--health-color", "red");
+    }
     setHealth(health - factor);
   };
 
   const cureLife = () => {
-    let life = document.querySelector(":root");
-    life.style.setProperty("--health", 100 + "px");
-    setHealth(100);
+    life.style.setProperty("--health-color", "greenyellow");
+    life.style.setProperty("--health", "100px");
+    setHealth(defaultHealth);
   };
 
   return (
