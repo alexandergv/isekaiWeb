@@ -1,32 +1,40 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
   let defaultHealth = 100;
   const [health, setHealth] = useState(defaultHealth);
-  const life = document.querySelector(":root");
+  const lifeStyle = document.querySelector(":root").style;
+
+  useEffect(() => {
+    lifeStyle.setProperty("--health", defaultHealth + "px");
+    console.log(defaultHealth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const reduceLife = (factor) => {
-    life.style.setProperty("--health", health - factor + "px");
-    if (health <= defaultHealth * 0.4) {
-      life.style.setProperty("--health-color", "red");
+    const damaged = health - factor;
+    if (damaged <= defaultHealth * 0.6) {
+      lifeStyle.setProperty("--health-color", "red");
     }
-    setHealth(health - factor);
+    lifeStyle.setProperty("--health", damaged + "px");
+    setHealth(damaged);
   };
 
   const cureLife = () => {
-    life.style.setProperty("--health-color", "greenyellow");
-    life.style.setProperty("--health", "100px");
+    lifeStyle.setProperty("--health-color", "greenyellow");
+    lifeStyle.setProperty("--health", defaultHealth + "px");
     setHealth(defaultHealth);
   };
 
   return (
     <div>
-      <h1 style={{ color: "red" }}>Hello StackBlitz!</h1>
+      <h1 style={{ color: "red" }}>Welcome to your new World!</h1>
       {health > 0 ? <div className="health-bar"></div> : <p>Is dead</p>}
-      <p>Start editing to see some magic happen</p>
+      <p>Click Attack to attack</p>
       <button onClick={() => reduceLife(10)}>Attack</button>
       <button onClick={cureLife}>Cure</button>
+      <button onClick={() => reduceLife(80)}> Use Magic</button>
     </div>
   );
 }
