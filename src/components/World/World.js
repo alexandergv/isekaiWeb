@@ -16,7 +16,9 @@ const World = () => {
     const nextDialog = (e) => {
       if (e.keyCode === 13) setMessage(message + 1);
     };
-
+    if (!messages[message]) {
+      setOnDialog(false);
+    }
     document.addEventListener("keydown", nextDialog);
 
     return function cleanUp() {
@@ -26,10 +28,13 @@ const World = () => {
 
   return (
     <div className="worldMap">
-      <div onClick={() => setDisplay(<Battle />)} className="place-togo bosque">
-        {" "}
-        Bosque{" "}
-      </div>{" "}
+      <button
+        disabled={onDialog}
+        onClick={() => setDisplay(<Battle />)}
+        className="place-togo bosque"
+      >
+        Bosque
+      </button>
       {messages[message] && <FloatingBox message={messages[message]} />}{" "}
     </div>
   );

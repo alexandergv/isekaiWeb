@@ -7,7 +7,6 @@ const Battle = () => {
 
   useEffect(() => {
     lifeStyle.setProperty("--health", defaultHealth + "px");
-    console.log(defaultHealth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -28,12 +27,12 @@ const Battle = () => {
 
   return (
     <>
-      <h1 style={{ color: "red" }}>Welcome to your new World!</h1>
-      {health > 0 ? <div className="health-bar"></div> : <p>Is dead</p>}
-      <p>Click Attack to attack</p>
-      <button onClick={() => reduceLife(10)}>Attack</button>
-      <button onClick={cureLife}>Cure</button>
-      <button onClick={() => reduceLife(80)}> Use Magic</button>
+      <h1 style={{ color: "red" }}> Welcome to your new World! </h1>{" "}
+      {health > 0 ? <div className="health-bar"> </div> : <p>Is dead</p>}{" "}
+      <p> Click Attack to attack </p>{" "}
+      <button onClick={() => reduceLife(10)}> Attack </button>{" "}
+      <button onClick={cureLife}> Cure </button>{" "}
+      <button onClick={() => reduceLife(80)}> Use Magic </button>{" "}
     </>
   );
 };
